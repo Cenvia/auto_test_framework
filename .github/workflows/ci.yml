@@ -13,42 +13,42 @@ jobs:
     
     steps:
     - name: 检出代码
-      uses: actions/checkout@v3
-    
+      uses: actions/checkout@v4  # 也升级到 v4
+
     - name: 设置 Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5  # 升级到 v5
       with:
         python-version: '3.10'
-    
+
     - name: 安装依赖
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         playwright install chromium
-    
+
     - name: 运行 API 测试
       run: |
         pytest testcases/api/ -v --tb=short
-    
+
     - name: 运行 UI 测试
       run: |
         pytest testcases/ui/ -v --tb=short
-    
+
     - name: 生成测试报告
       if: always()
       run: |
         pytest -v --html=reports/report.html --self-contained-html
-    
+
     - name: 上传报告
       if: always()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4  # v3 → v4
       with:
         name: test-report
         path: reports/
-    
+
     - name: 上传截图（如果有）
       if: failure()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4  # v3 → v4
       with:
         name: failure-screenshots
         path: screenshots/
