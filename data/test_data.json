@@ -1,0 +1,20 @@
+{
+  "api": {
+    "base_url": "https://jsonplaceholder.typicode.com",
+    "test_user": {
+      "id": 1,
+      "name": "Leanne Graham",
+      "email": "Sincere@april.biz"
+    },
+    "new_post": {
+      "title": "测试文章",
+      "body": "这是测试内容",
+      "userId": 1
+    }
+  },
+  "ui": {
+    "search_keywords": ["pytest", "playwright", "automation"],
+    "baidu_url": "https://www.baidu.com",
+    "bing_url": "https://www.bing.com"
+  }
+}
