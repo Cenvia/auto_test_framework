@@ -13,10 +13,10 @@ jobs:
     
     steps:
     - name: 检出代码
-      uses: actions/checkout@v4  # 也升级到 v4
+      uses: actions/checkout@v4
 
     - name: 设置 Python
-      uses: actions/setup-python@v5  # 升级到 v5
+      uses: actions/setup-python@v5
       with:
         python-version: '3.10'
 
@@ -34,24 +34,24 @@ jobs:
       run: |
         pytest testcases/ui/ -v --tb=short
 
-    - name:  生成测试报告
+    - name: 生成测试报告
       if: always()
       run: |
-      # 先删除旧报告目录（如果存在），再重新创建
+        # 先删除旧报告目录（如果存在），再重新创建
         if (Test-Path reports) { Remove-Item -Recurse -Force reports }
         New-Item -ItemType Directory -Force reports
         pytest -v --html=reports/report.html --self-contained-html
 
     - name: 上传报告
       if: always()
-      uses: actions/upload-artifact@v4  # v3 → v4
+      uses: actions/upload-artifact@v4
       with:
         name: test-report
         path: reports/
 
     - name: 上传截图（如果有）
       if: failure()
-      uses: actions/upload-artifact@v4  # v3 → v4
+      uses: actions/upload-artifact@v4
       with:
         name: failure-screenshots
         path: screenshots/
