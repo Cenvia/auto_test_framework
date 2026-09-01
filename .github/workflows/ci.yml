@@ -37,7 +37,9 @@ jobs:
     - name:  生成测试报告
       if: always()
       run: |
-        mkdir -p reports
+      # 先删除旧报告目录（如果存在），再重新创建
+        if (Test-Path reports) { Remove-Item -Recurse -Force reports }
+        New-Item -ItemType Directory -Force reports
         pytest -v --html=reports/report.html --self-contained-html
 
     - name: 上传报告
